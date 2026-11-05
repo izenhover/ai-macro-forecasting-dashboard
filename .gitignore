@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secret Strategy Files (DO NOT UPLOAD)
+usd_model.py
+data_engine.py
+strategy_config.py
+usd_history.csv
+*.log
+
+# Streamlit
+.streamlit/secrets.toml
+# Temporary generator and fix scripts
+*generate*.py
+fix_*.py
+builder_usd.py
+enable_autorefresh.py
