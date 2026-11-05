@@ -1,15 +1,15 @@
-"""تنظیمات مرکزی سیستم پیش‌بینی و مدیریت ریسک"""
+"""Central Configuration for Macro Forecasting System"""
 
 from dataclasses import dataclass, field
 from typing import List, Dict
 
 @dataclass
 class DataConfig:
-    """تنظیمات داده"""
+    """Data Fetching Configuration"""
     assets: List[str] = field(default_factory=lambda: [
         "GC=F",      # Gold Futures
         "CL=F",      # Crude Oil
-        "USDIRR=X",  # USD/IRR (نرخ آزاد دلار)
+        "USDIRR=X",  # USD/IRR (Free Market Rate)
     ])
     lookback_days: int = 365
     freq: str = "1d"
@@ -17,7 +17,7 @@ class DataConfig:
 
 @dataclass
 class SentimentConfig:
-    """تنظیمات Sentiment"""
+    """NLP Sentiment Analysis Configuration"""
     model_name: str = "ProsusAI/finbert"
     confidence_threshold: float = 0.6
     source_credibility: Dict[str, float] = field(default_factory=lambda: {
@@ -30,7 +30,7 @@ class SentimentConfig:
 
 @dataclass
 class RegimeConfig:
-    """تنظیمات تشخیص رژیم"""
+    """Market Regime Detection Configuration"""
     n_regimes: int = 4
     hmm_covariance: str = "full"
     hmm_iter: int = 1000
@@ -39,19 +39,19 @@ class RegimeConfig:
 
 @dataclass
 class PredictionConfig:
-    """تنظیمات پیش‌بینی"""
+    """Deep Learning Model Hyperparameters (Optimized for speed)"""
     hidden_dim: int = 32
     lstm_layers: int = 1
     dropout: float = 0.2
     seq_length: int = 30
     forecast_horizon: int = 7
-    conformal_alpha: float = 0.10  # 90% اطمینان
+    conformal_alpha: float = 0.10  # 90% Confidence Interval
     batch_size: int = 32
-    epochs: int = 10
+    epochs: int = 10               # Reduced for faster dashboard loading
 
 @dataclass
 class RiskConfig:
-    """تنظیمات مدیریت ریسک"""
+    """Risk Management and Portfolio Optimization Configuration"""
     max_drawdown: float = 0.15
     max_weight_per_asset: float = 0.40
     min_weight_per_asset: float = 0.10
@@ -66,7 +66,7 @@ class RiskConfig:
 
 @dataclass
 class OnlineConfig:
-    """تنظیمات یادگیری آنلاین"""
+    """Online Learning and Concept Drift Configuration"""
     drift_detector: str = "ADWIN"
     drift_threshold: float = 0.002
     retrain_frequency: int = 7
@@ -74,7 +74,7 @@ class OnlineConfig:
 
 @dataclass
 class SystemConfig:
-    """تنظیمات کل سیستم"""
+    """Main System Configuration"""
     data: DataConfig = field(default_factory=DataConfig)
     sentiment: SentimentConfig = field(default_factory=SentimentConfig)
     regime: RegimeConfig = field(default_factory=RegimeConfig)
