@@ -23,3 +23,4 @@ git clone https://github.com/izenhover/ai-macro-forecasting-dashboard.git
 cd ai-macro-forecasting-dashboard
 pip install -r requirements.txt
 python -m streamlit run dashboard.py
+<img width="1440" height="900" alt="Screenshot (184)" src="https://github.com/user-attachments/assets/b47a2e7e-fd90-4f7e-9359-8623d6139b38" />
