@@ -277,7 +277,7 @@ def run_analysis():
 
 def usd_trading_signal(change_pct, regime):
     if change_pct is None:
-        return "HOLD", "منتظر بمان", "داده کافی نیست"
+        return "HOLD", "HOLD", "Not enough data"
     if regime == "BEAR":
         buy_th, sell_th = 3.0, -1.0
     elif regime == "BULL":
@@ -287,16 +287,16 @@ def usd_trading_signal(change_pct, regime):
     else:
         buy_th, sell_th = 2.0, -2.0
     if change_pct > buy_th:
-        return "BUY", "BUY", "Forecast رشد " + format(change_pct, ".2f") + "%"
+        return "BUY", "BUY", "Expected growth " + format(change_pct, ".2f") + "% - Buy opportunity"
     elif change_pct < sell_th:
-        return "SELL", "SELL", "Forecast افت " + format(change_pct, ".2f") + "%"
+        return "SELL", "SELL", "Expected drop " + format(change_pct, ".2f") + "% - Sell opportunity"
     else:
-        return "HOLD", "منتظر بمان", "Volatility کم"
-
+        return "HOLD", "HOLD", "Low volatility (" + format(change_pct, "+.2f") + "%) - Unclear signal"
+        
 
 def suggest_capital(change_pct, regime, cvar):
     if change_pct is None or regime is None:
-        return 0, "داده کافی نیست"
+        return 0, "Not enough data"
     base = 20.0
     if regime == "HIGH_VOL":
         base = 10.0
@@ -433,9 +433,9 @@ def render_multi_timeframe_predictions():
 
 
 def render_usd_prediction_panel(usd_pred, regime, cvar):
-    st.markdown('<div class="panel"><div class="panel-title">💵 Forecast دلار - Final Signal</div>', unsafe_allow_html=True)
+    st.markdown('<div class="panel"><div class="panel-title">💵 USD Forecast - Final Signal</div>', unsafe_allow_html=True)
     if usd_pred is None:
-        st.warning("داده دلار در دسترس نیست")
+        st.warning("USD data is not available")
         st.markdown('</div>', unsafe_allow_html=True)
         return
 
@@ -444,21 +444,22 @@ def render_usd_prediction_panel(usd_pred, regime, cvar):
 
     col1, col2 = st.columns([1.3, 1])
     with col1:
-        st.markdown('<div class="usd-panel"><div class="usd-label">قیمت فعلی دلار آزاد</div><div class="usd-price-big">' + format(usd_pred["price_current"], ",.0f") + '</div><div class="usd-label">Tomans</div></div>', unsafe_allow_html=True)
+        st.markdown('<div class="usd-panel"><div class="usd-label">Current Free USD Rate</div><div class="usd-price-big">' + format(usd_pred["price_current"], ",.0f") + '</div><div class="usd-label">Tomans</div></div>', unsafe_allow_html=True)
         change = usd_pred.get("change_pct", 0)
         color = "#00a86b" if change > 0 else "#d62828"
         st.markdown('<div class="usd-panel" style="border-color:' + color + ';"><div class="usd-label">7-Day Forecast</div><div class="usd-price-big" style="color:' + color + ';">' + format(usd_pred["price_predicted"], ",.0f") + '</div><div class="usd-label">Tomans · ' + format(change, "+.2f") + '%</div></div>', unsafe_allow_html=True)
 
     with col2:
         signal_class = "signal-" + action.lower()
-        signal_fa = {"BUY": "BUY", "SELL": "SELL", "HOLD": "HOLD کن"}[action]
-        st.markdown('<div class="big-signal ' + signal_class + '"><p class="action">' + signal_fa + '</p><p style="font-size:13px;color:#0d2c4f;margin-top:8px;">' + action + '</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="big-signal ' + signal_class + '"><p class="action">' + action + '</p><p style="font-size:13px;color:#0d2c4f;margin-top:8px;">' + action + '</p></div>', unsafe_allow_html=True)
+        
         st.markdown('<div style="background:#f0f7fd;border-right:3px solid #1976d2;padding:10px;border-radius:4px;margin-top:10px;font-size:12px;color:#0d2c4f;"><b>Reason:</b> ' + reason + '</div>', unsafe_allow_html=True)
+        
         if cap_pct > 0:
-            st.markdown('<div style="background:#fff9e6;border-right:3px solid #f57c00;padding:12px;border-radius:4px;margin-top:8px;"><div style="color:#0d2c4f;font-size:13px;"><b>💰 Capital Suggestion:</b> حداکثر <span style="color:#f57c00;font-size:18px;font-weight:900;">' + format(cap_pct, ".1f") + '%</span> از کل سرمایه</div><div style="color:#5a7a9a;font-size:10px;margin-top:4px;">Basis: ' + cap_reason + '</div></div>', unsafe_allow_html=True)
+            st.markdown('<div style="background:#fff9e6;border-right:3px solid #f57c00;padding:12px;border-radius:4px;margin-top:8px;"><div style="color:#0d2c4f;font-size:13px;"><b>Capital Suggestion:</b> Max <span style="color:#f57c00;font-size:18px;font-weight:900;">' + format(cap_pct, ".1f") + '%</span> of total capital</div><div style="color:#5a7a9a;font-size:10px;margin-top:4px;">Basis: ' + cap_reason + '</div></div>', unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
-
+    
 
 def render_news_panel(news, sentiment):
     st.markdown('<div class="panel"><div class="panel-title">📰 اخبار زنده + تحلیل احساسات</div>', unsafe_allow_html=True)
