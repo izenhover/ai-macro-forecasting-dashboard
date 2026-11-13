@@ -1,5 +1,5 @@
 # 🌐 AI Macro Forecasting Dashboard
-<img width="1440" height="900" alt="Screenshot (223)" src="https://github.com/user-attachments/assets/27a47145-0931-4a64-8b90-dcd4e97034f0" />
+<img width="1440" height="900" alt="Screenshot (233)" src="https://github.com/user-attachments/assets/4a286ee2-7ff1-4b74-8523-fb4fd9a07868" />
 
 
 An advanced, multi-asset financial dashboard built with **Python** and **Streamlit**, designed to forecast macro market trends (USD/IRR, Gold, and Oil) across multiple timeframes.
