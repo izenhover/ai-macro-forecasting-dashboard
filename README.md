@@ -1,5 +1,7 @@
 # 🌐 AI Macro Forecasting Dashboard
 
+https://www.youtube.com/watch?v=qp-rAdzqiZA
+
 <img width="1440" height="900" alt="Screenshot (235)" src="https://github.com/user-attachments/assets/88b2b4af-b142-49c8-a444-8480f796bc31" />
 
 An advanced, multi-asset financial dashboard built with **Python** and **Streamlit**, designed to forecast macro market trends (USD/IRR, Gold, and Oil) across multiple timeframes.
@@ -25,6 +27,3 @@ git clone https://github.com/izenhover/ai-macro-forecasting-dashboard.git
 cd ai-macro-forecasting-dashboard
 pip install -r requirements.txt
 python -m streamlit run dashboard.py
-
-
-https://www.youtube.com/watch?v=qp-rAdzqiZA
