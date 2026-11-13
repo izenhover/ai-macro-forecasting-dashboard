@@ -1,7 +1,5 @@
 # 🌐 AI Macro Forecasting Dashboard
 
-https://www.youtube.com/watch?v=qp-rAdzqiZA
-
 <img width="1440" height="900" alt="Screenshot (235)" src="https://github.com/user-attachments/assets/88b2b4af-b142-49c8-a444-8480f796bc31" />
 
 An advanced, multi-asset financial dashboard built with **Python** and **Streamlit**, designed to forecast macro market trends (USD/IRR, Gold, and Oil) across multiple timeframes.
@@ -20,6 +18,8 @@ An advanced, multi-asset financial dashboard built with **Python** and **Streaml
 
 ## ⚙️ Architecture Note
 This repository serves as the **public portfolio interface** for the project. The proprietary core strategy, deep learning weights, and specific feature engineering pipelines have been abstracted for intellectual property protection. A `mock_engine.py` is provided to demonstrate the UI functionality.
+
+video link:https://www.youtube.com/watch?v=qp-rAdzqiZA
 
 ## 📦 Installation & Run
 ```bash
